@@ -1,14 +1,17 @@
+import 'reflect-metadata';
+
 import dotenv from "dotenv";
 dotenv.config();
 
+import './database';
+
 import express from 'express';
+import { routes } from './routes';
 
 const app = express();
+app.use(express.json());
+app.use(routes);
 
-app.get('/users', (_, res) => {
-  return res.json({ message: 'Hello World' });
+app.listen(process.env.PORT, () => {
+  console.log(`Server running at port ${process.env.PORT} `);
 });
-
-app.listen(process.env.PORT || 3333, () => { 
-  console.log(`Server running at port ${process.env.PORT || 3333} `);
-})
