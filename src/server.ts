@@ -1,7 +1,9 @@
 import 'reflect-metadata';
 
-import dotenv from "dotenv";
-dotenv.config();
+import dotenv from 'dotenv';
+dotenv.config({
+  path: process.env.NODE_ENV == 'development' ? '.env.development' : process.env.NODE_ENV == 'test' ? '.env.test' : '.env'
+});
 
 import './database';
 

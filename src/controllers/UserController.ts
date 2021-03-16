@@ -21,6 +21,12 @@ class UserController {
 
     return res.json(newUser);
   }
+
+  async find(req: Request, res: Response) {
+    const userRepository = getRepository(User);
+    const users = await userRepository.find();
+    return res.json(users);
+  }
 }
 
 const userController = new UserController();
