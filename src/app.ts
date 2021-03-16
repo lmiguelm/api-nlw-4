@@ -7,10 +7,11 @@ import createConnection from './database/';
 createConnection();
 
 import express from 'express';
+import 'express-async-errors';
 import { routes } from './routes';
+import { MiddlewareError } from './middlewares/MiddlewareErrors';
 
-const app = express();
+export const app = express();
 app.use(express.json());
 app.use(routes);
-
-export { app };
+app.use(MiddlewareError);

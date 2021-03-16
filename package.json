@@ -6,19 +6,19 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
     "handlebars": "^4.7.7",
     "mysql2": "^2.2.5",
     "nodemailer": "^6.5.0",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.31",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yup": "^0.32.9"
   },
   "scripts": {
     "dev:server": "SET NODE_ENV=dev& ts-node-dev src/server.ts --transpile-only --ignore-watch node_modules",
     "dev:typeorm": "SET NODE_ENV=dev&ts-node-dev ./node_modules/typeorm/cli.js",
-    "test": "SET NODE_ENV=test&jest",
-    "posttest": "del /f .\\src\\database\\database.test.sqlite",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+    "test": "SET NODE_ENV=test&jest -i"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
