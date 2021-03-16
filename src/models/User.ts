@@ -6,13 +6,13 @@ import { v4 as uuid } from 'uuid';
 export class User {
 
   @PrimaryColumn('uuid')
-  readonly id: String;
+  readonly id: string;
 
   @Column()
-  name: String;
+  name: string;
 
   @Column()
-  email: String;
+  email: string;
 
   @CreateDateColumn()
   created_at: Date;

@@ -6,13 +6,13 @@ import { v4 as uuid } from 'uuid';
 export class Survey {
 
   @PrimaryColumn('uuid')
-  readonly id: String;
+  readonly id: string;
 
   @Column()
-  title: String;
+  title: string;
 
   @Column()
-  description: String;
+  description: string;
 
   @CreateDateColumn()
   created_at: Date;

@@ -1,22 +1,38 @@
 import dotenv from 'dotenv';
-dotenv.config({
-  path: process.env.NODE_ENV == 'development' ? '.env.development' : process.env.NODE_ENV == 'test' ? '.env.test' : '.env'
-});
+dotenv.config();
 
 import { ConnectionOptions } from 'typeorm';
 
-const config: ConnectionOptions = {
-  type: process.env.DATABASE_TYPE as any,
-  host: process.env.DATABASE_HOST as string,
-  port: Number(process.env.DATABASE_PORT as string) || undefined,
-  username: process.env.DATABASE_USERNAME as string,
-  password: process.env.DATABASE_PASSWORD as string,
-  database: process.env.DATABASE as string,
-  cli: {
-    migrationsDir: './src/database/migrations'
+const environments = {
+  test: {
+    type: 'sqlite',
+    database: './src/database/database.test.sqlite'
   },
-  migrations: ['./src/database/migrations/*.ts'],
-  entities: ['./src/models/*.ts'],
+  dev: {
+    type: 'mysql',
+    host: 'localhost',
+    port: 3306,
+    username: 'root',
+    password: 'usbw',
+    database: 'nlw_04_api'
+  },
+  prod: {
+    type: process.env.DATABASE_TYPE,
+    host: process.env.DATABASE_HOST,
+    port: process.env.DATABASE_PORT,
+    username: process.env.DATABASE_USERNAME,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE
+  }
 }
 
-export default config;
+const options: ConnectionOptions = {
+  ...environments[process.env.NODE_ENV as string],
+  migrations: ['./src/database/migrations/*.ts'],
+  entities: ['./src/models/*.ts'],
+  cli: {
+    migrationsDir: './src/database/migrations'
+  }
+}
+
+export default options;
